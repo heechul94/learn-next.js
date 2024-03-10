@@ -104,7 +104,7 @@ Next.js는 `next/font` 모듈을 사용할 때 애플리케이션에서 글꼴�
 - 뷰포트 외부에 있는 이미지를 지연로드합니다.
 
 `next/image` 컴포넌트를 사용하여 이미지를 자동으로 최적화할 수 있습니다.
-<Image> 컴포넌트
+### `<Image>` 컴포넌트
 `<Image>`컴포넌트는 HTML `<img>`태그의 확장이며 다음과 같은 자동 이미지 최적화 기능을 제공합니다.
 
 - 이미지가 로드될 때 자동으로 레이아웃 시프트 방지.
@@ -118,12 +118,12 @@ Next.js는 `next/font` 모듈을 사용할 때 애플리케이션에서 글꼴�
 
 - Next.js는 <strong>폴더</strong>를 사용하여 중첩된 경로를 만드는 파일 시스템 라우팅을 사용합니다. 각 폴더는 <strong>URL 세그먼트</strong>에 매핑되는 <strong>경로 세그먼트</strong>를 나타냅니다.
 - 중첩된 경로를 만들려면 각 폴더를 서로 중첩시키고 내부에 page.tsx 파일을 추가하면 됩니다.
-  > ![folders-to-url-segments](https://github.com/heechul94/learn-next.js/assets/100992153/dd52e550-c76a-42c5-8d8d-c2b85b472c7e) > ![dashboard-route](https://github.com/heechul94/learn-next.js/assets/100992153/30579d24-5f60-4742-b412-466348ecf1ec)
+  > ![folders-to-url-segments](https://github.com/heechul94/learn-next.js/assets/100992153/dd52e550-c76a-42c5-8d8d-c2b85b472c7e)  ![dashboard-route](https://github.com/heechul94/learn-next.js/assets/100992153/30579d24-5f60-4742-b412-466348ecf1ec)
 
 ### 레이아웃
 
 - Next.js에서 여러 페이지 간에 공유되는 UI를 만들려면 layout.tsx라는 특별한 파일을 사용할 수 있습니다.
-- <Layout /> 컴포넌트는 children 속성을 받습니다. 이 자식 요소는 페이지거나 다른 레이아웃일 수 있습니다. 여러분의 경우 /dashboard 내부의 페이지는 자동으로 <Layout /> 내에 중첩될 것입니다
+- `<Layout />` 컴포넌트는 children 속성을 받습니다. 이 자식 요소는 페이지거나 다른 레이아웃일 수 있습니다. 여러분의 경우 /dashboard 내부의 페이지는 자동으로 `<Layout />` 내에 중첩될 것입니다
 
 ```javascript
 import SideNav from '@/app/ui/dashboard/sidenav';
@@ -138,11 +138,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 ```
-
 > ![shared-layout](https://github.com/heechul94/learn-next.js/assets/100992153/fdddeb82-5c0f-4fd9-9ccd-101754c5d852)
 
 - Next.js에서 레이아웃의 장점은 페이지 컴포넌트만 업데이트되고 레이아웃은 다시 렌더링되지 않는다는 것입니다. 이를 `부분 렌더링`이라고 합니다
-  > ![partial-rendering-dashboard](https://github.com/heechul94/learn-next.js/assets/100992153/034863cd-4d7a-4957-be55-f3d8b7626b2f)
+> ![partial-rendering-dashboard](https://github.com/heechul94/learn-next.js/assets/100992153/034863cd-4d7a-4957-be55-f3d8b7626b2f)
 
 ### 루트 레이아웃
 
@@ -165,19 +164,19 @@ export default function RootLayout({
 
 - 필수로 존재해야 합니다.
 - 루트 레이아웃에 추가한 모든 UI는 애플리케이션의 모든 페이지에서 공유됩니다.
-- 루트 레이아웃에는 <html> 및 <body> 태그를 수정하고 메타데이터를 추가할 수 있습니다
+- 루트 레이아웃에는 `<html>` 및 `<body>` 태그를 수정하고 메타데이터를 추가할 수 있습니다
 
 ## Chapter 5. Navigating Between Pages
 
 ### 페이지 이동 최적화의 필요성
 
-페이지 간에 링크를 만들려면 전통적으로는 <a> HTML 요소를 사용해야 합니다. 하지만 이 방법은 페이지 이동시 전체 페이지가 새로 고침됩니다.
+페이지 간에 링크를 만들려면 전통적으로는 `<a>` HTML 요소를 사용해야 합니다. 하지만 이 방법은 페이지 이동시 전체 페이지가 새로 고침됩니다.
 
-## <Link> 컴포넌트
+## `<Link>` 컴포넌트
 
-- Next.js에서는 애플리케이션 내의 페이지 간에 링크를 만들기 위해 <Link /> 컴포넌트를 사용할 수 있습니다. <Link>를 사용하면 JavaScript를 사용하여 클라이언트-사이드 페이지 이동이 가능합니다.
-- Link 컴포넌트는 <a> 태그를 사용하는 것과 유사하지만 <a href="…"> 대신에 <Link href="…">를 사용합니다.
+- Next.js에서는 애플리케이션 내의 페이지 간에 링크를 만들기 위해 `<Link />` 컴포넌트를 사용할 수 있습니다. `<Link>`를 사용하면 JavaScript를 사용하여 클라이언트-사이드 페이지 이동이 가능합니다.
+- Link 컴포넌트는 `<a>` 태그를 사용하는 것과 유사하지만 `<a href="…">` 대신에 `<Link href="…">`를 사용합니다.
 - 라우터가 초기 로드 시 모든 애플리케이션 코드를 로드하는 전통적인 React 싱글 페이지 애플리케이션과 다릅니다.
 - 페이지 이동 경험을 향상시키기 위해 Next.js는 라우트 세그먼트별로 애플리케이션 코드를 자동으로 분할합니다.
 - 라우트별로 코드를 분할하면 페이지가 격리됩니다. 특정 페이지에서 오류가 발생하더라도 나머지 애플리케이션은 여전히 작동합니다.
-- production 환경에서 브라우저 뷰포트에 <Link> 컴포넌트가 나타나면 Next.js가 자동으로 연결된 경로의 코드를 백그라운드에서 **사전로드(prefetches)**합니다. 사용자가 링크를 클릭할 때 대상 페이지의 코드는 이미 백그라운드에서 로드되어 페이지 전환이 거의 즉시 발생합니다!
+- production 환경에서 브라우저 뷰포트에 `<Link>` 컴포넌트가 나타나면 Next.js가 자동으로 연결된 경로의 코드를 백그라운드에서 **사전로드(prefetches)**합니다. 사용자가 링크를 클릭할 때 대상 페이지의 코드는 이미 백그라운드에서 로드되어 페이지 전환이 거의 즉시 발생합니다!
