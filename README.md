@@ -100,3 +100,54 @@ Next.js는 ```next/font``` 모듈을 사용할 때 애플리케이션에서 글�
 - 기본적으로 이미지를 지연로드 (이미지가 뷰포트에 진입할 때 로드).
 - 브라우저가 지원하는 경우 WebP 및 AVIF와 같은 현대적인 포맷으로 이미지 제공.
 
+## Chapter 4. Creating Layouts and Pages
+### 중첩 라우팅 
+- Next.js는 <strong>폴더</strong>를 사용하여 중첩된 경로를 만드는 파일 시스템 라우팅을 사용합니다. 각 폴더는 <strong>URL 세그먼트</strong>에 매핑되는 <strong>경로 세그먼트</strong>를 나타냅니다.
+- 중첩된 경로를 만들려면 각 폴더를 서로 중첩시키고 내부에 page.tsx 파일을 추가하면 됩니다.
+> ![folders-to-url-segments](https://github.com/heechul94/learn-next.js/assets/100992153/dd52e550-c76a-42c5-8d8d-c2b85b472c7e)
+> ![dashboard-route](https://github.com/heechul94/learn-next.js/assets/100992153/30579d24-5f60-4742-b412-466348ecf1ec)
+
+### 레이아웃
+-  Next.js에서 여러 페이지 간에 공유되는 UI를 만들려면 layout.tsx라는 특별한 파일을 사용할 수 있습니다.
+-  <Layout /> 컴포넌트는 children 속성을 받습니다. 이 자식 요소는 페이지거나 다른 레이아웃일 수 있습니다. 여러분의 경우 /dashboard 내부의 페이지는 자동으로 <Layout /> 내에 중첩될 것입니다
+```javascript
+import SideNav from '@/app/ui/dashboard/sidenav';
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex h-screen flex-col md:flex-row md:overflow-hidden">
+      <div className="w-full flex-none md:w-64">
+        <SideNav />
+      </div>
+      <div className="flex-grow p-6 md:overflow-y-auto md:p-12">{children}</div>
+    </div>
+  );
+}
+```
+> ![shared-layout](https://github.com/heechul94/learn-next.js/assets/100992153/fdddeb82-5c0f-4fd9-9ccd-101754c5d852)
+- Next.js에서 레이아웃의 장점은 페이지 컴포넌트만 업데이트되고 레이아웃은 다시 렌더링되지 않는다는 것입니다. 이를 ```부분 렌더링```이라고 합니다
+> ![partial-rendering-dashboard](https://github.com/heechul94/learn-next.js/assets/100992153/034863cd-4d7a-4957-be55-f3d8b7626b2f)
+
+### 루트 레이아웃
+```javascript
+import '@/app/ui/global.css';
+import { inter } from '@/app/ui/fonts';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>{children}</body>
+    </html>
+  );
+}
+```
+- 필수로 존재해야 합니다. 
+- 루트 레이아웃에 추가한 모든 UI는 애플리케이션의 모든 페이지에서 공유됩니다.
+- 루트 레이아웃에는 <html> 및 <body> 태그를 수정하고 메타데이터를 추가할 수 있습니다
+
+
+
+
